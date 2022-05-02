@@ -6,15 +6,15 @@ pragma solidity 0.8.10;
 // PRODUCTS
 //
 
-interface Product {
+interface IProduct {
     function doStuff() external;
 }
 
-contract ConcreteProductA is Product {
+contract ConcreteProductA is IProduct {
     function doStuff() external override {}
 }
 
-contract ConcreteProductB is Product {
+contract ConcreteProductB is IProduct {
     function doStuff() external override {}
 }
 
@@ -27,17 +27,17 @@ abstract contract Creator {
         // ...
     }
 
-    function createProduct() external virtual returns(Product);
+    function createProduct() external virtual returns(IProduct);
 }
 
 contract ConcreteCreatorA is Creator {
-    function createProduct() external override returns(Product) {
+    function createProduct() external override returns(IProduct) {
         return new ConcreteProductA();
     }
 }
 
 contract ConcreteCreatorB is Creator {
-    function createProduct() external override returns(Product) {
+    function createProduct() external override returns(IProduct) {
         return new ConcreteProductB();
     }
 }
