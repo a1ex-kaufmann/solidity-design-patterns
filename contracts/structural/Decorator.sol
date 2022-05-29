@@ -17,12 +17,21 @@ contract BaseDecorator is IComponent {
 
     IComponent wrappee;
 
+    constructor(IComponent _wrappee) {
+        wrappee = _wrappee;
+    }
+
     function execute() public virtual override {
         wrappee.execute();
+        // ...
     }
 }
 
 contract ConcreteDecorators is BaseDecorator {
+
+    constructor(IComponent _wrappee) BaseDecorator(_wrappee) {
+        // ...
+    }
 
     function execute() public override {
         super.execute();
@@ -33,10 +42,13 @@ contract ConcreteDecorators is BaseDecorator {
 
 contract Client {
 
-    IComponent comp;
     function someMethod() external {
 
-        comp.execute();
+        ConcreteComponent comp = new ConcreteComponent();
+        BaseDecorator decorated1 = new BaseDecorator(comp);
+
+        decorated1;
+        // ...
         
     }
 }
