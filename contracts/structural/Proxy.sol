@@ -2,8 +2,19 @@
 // solhint-disable no-empty-blocks
 pragma solidity 0.8.10;
 
+interface IService {
+    
+    function operation() external;
+}
 
-contract Proxy {
+contract Service is IService {
+    
+    function operation() external {
+        // ...
+    }
+}
+
+contract Proxy is IService {
 
     Service realService;
 
@@ -19,18 +30,6 @@ contract Proxy {
         if (checkAccess()) {
             realService.operation();
         }
-    }
-}
-
-interface IService {
-    
-    function operation() external;
-}
-
-contract Service is IService {
-    
-    function operation() external {
-        // ...
     }
 }
 
